@@ -20,8 +20,8 @@ class ContactData extends Component {
         // console.log(this.props.ingredients);
         this.setState({loading: true});
         const order = {
-            ingredients: this.state.ingredients,
-            price: this.state.totalPrice,
+            ingredients: this.props.ingredients,
+            price: this.props.price,
             customer: {
                 name: "Sumit Kumar Pandit",
                 address: {
@@ -36,6 +36,7 @@ class ContactData extends Component {
         axios.post("/orders.json", order)
             .then(response => {
                 this.setState({loading: false});
+                this.props.history.push('/');
             })
             .catch(error => {
                 this.setState({loading: false});
@@ -53,7 +54,7 @@ class ContactData extends Component {
             </form>
         );
         if(this.state.loading) {
-            form = <Spinner />
+            form = <Spinner />;
         }
         return (
             <div className={classes.ContactData}>
